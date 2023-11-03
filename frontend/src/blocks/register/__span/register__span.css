@@ -1,0 +1,9 @@
+.register__span {
+  transition: .2s ease-in;
+  color: white;
+  text-decoration: none;
+}
+
+.register__span:hover {
+  opacity: .6;
+}

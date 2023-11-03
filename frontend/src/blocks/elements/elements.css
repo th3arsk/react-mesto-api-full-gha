@@ -1,0 +1,15 @@
+.elements {
+  width: 100%;
+  justify-items: center;
+  display: flex;
+  row-gap: 20px;
+  column-gap: 17px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media screen and (max-width: 500px){
+  .elements {
+    width: calc(100% - 38px);
+  }
+}

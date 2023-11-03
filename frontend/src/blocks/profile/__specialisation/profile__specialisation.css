@@ -1,0 +1,21 @@
+.profile__specialisation {
+  padding: 0;
+  margin: 16px 0 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  grid-row: 2;
+  grid-column: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 900px) {
+    .profile__specialisation {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }  
+          
+}

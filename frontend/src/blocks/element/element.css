@@ -1,0 +1,13 @@
+.element {
+  max-width: 282px;
+  height: 361px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: grid;
+  grid-template-areas: 
+  'image image'
+  'name like'
+  'name like-count';
+  position: relative;
+}
