@@ -47,7 +47,7 @@ const createUser = (req, res, next) => {
 
 const getUsers = (_req, res, next) => {
   User.find()
-    .then((user) => res.send(user))
+    .then((users) => res.send(users))
     .catch(next);
 };
 
@@ -94,7 +94,7 @@ const login = (req, res, next) => {
   User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, 'secret-key', { expiresIn: '7d' });
-      res.status(200).cookie('jwt', token, { maxAge: 3600000, httpOnly: true }).send({ token });
+      res.status(200).send({ token });
 
       if (!user) {
         throw new NotFoundError('Пользователь не найден');

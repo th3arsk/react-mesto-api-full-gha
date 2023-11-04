@@ -8,7 +8,7 @@ const createCard = (req, res, next) => {
   const owner = req.user._id;
 
   Card.create({ name, link, owner })
-    .then((card) => res.status(201).send({ data: card }))
+    .then((card) => res.status(201).send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new ValidationError('Некорректные данные'));
@@ -20,7 +20,7 @@ const createCard = (req, res, next) => {
 
 const getCards = (_req, res, next) => {
   Card.find()
-    .then((card) => res.send(card))
+    .then((cards) => res.send(cards))
     .catch(next);
 };
 
@@ -32,7 +32,7 @@ const removeCard = (req, res, next) => {
     .then((card) => {
       if (card.owner.toString() === req.user._id) {
         Card.findByIdAndDelete(cardId)
-          .then(res.json({ deletedData: card }));
+          .then(res.json(card));
       } else if (card.owner !== req.user._id) {
         throw new AccessError('Нет доступа');
       }

@@ -1,4 +1,5 @@
-const BASE_URL = 'https://auth.nomoreparties.co'
+//const BASE_URL = 'https://auth.nomoreparties.co' 
+const BASE_URL = 'http://localhost:3008'
 
 export function signup(password, email) {
   return fetch(`${BASE_URL}/signup`, {
@@ -42,7 +43,9 @@ export function signin(password, email) {
   })
 }
 
-export function checkToken(token) {
+export function checkToken() {
+  const token = localStorage.getItem('jwt');
+  
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {

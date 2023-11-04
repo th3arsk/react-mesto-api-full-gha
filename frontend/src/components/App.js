@@ -24,35 +24,16 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isInfoPopupIsOpen, setInfoPopupOpen] = React.useState(false);
   const [infoPopupStatus, setInfoPopupStatus] = React.useState(false);
-  const [userEmail, setUserEmail] = React.useState('');
-  
+  const [userEmail, setUserEmail] = React.useState(' ');
   const [currentUser, setCurrentUser] = React.useState({ })
-
-  React.useEffect(() => {
-    api.getUserInfo()
-    .then((res) => {
-      setCurrentUser(res)
-    })
-    .catch(err => console.log(`Ошибка.....: ${err}`));
-  }, [])
-
   const [ cards, setCards ] = React.useState([ ]);
 
   React.useEffect(() => {
-    api.getInitialCards()
-    .then((res) => {
-      setCards(res)
-    })
-    .catch(err => console.log(`Ошибка.....: ${err}`));
-  }
-  , [])
-
-  React.useEffect(() => {
     handleTokenCheck()
-  })
+  }, )
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     
     isLiked ? 
       api.removeLike(card._id, !isLiked)
@@ -148,14 +129,24 @@ function App() {
 
   function handleTokenCheck() {
     if (localStorage.getItem('jwt')) {
-      const jwt = localStorage.getItem('jwt');
+      api.getUserInfo()
+      .then((res) => {
+        setCurrentUser(res)
+      })
+      .catch(err => console.log(`Ошибка.....: ${err}`));
 
-      checkToken(jwt)
+      api.getInitialCards()
+      .then((res) => {
+        setCards(res)
+      })
+      .catch(err => console.log(`Ошибка.....: ${err}`));
+
+      checkToken()
       .then((res) => {
         if (res) {
           navigate("/")
           setLoggedIn(true)
-          setUserEmail(res.data.email);
+          setUserEmail(res.email);
         } else {
           navigate("/sign-in")
         }
@@ -175,9 +166,9 @@ function App() {
   }
 
   function exit() {
+    navigate('sign-in');
     setLoggedIn(false);
     localStorage.removeItem('jwt');
-    navigate("/sign-in")
   }
 
   return (

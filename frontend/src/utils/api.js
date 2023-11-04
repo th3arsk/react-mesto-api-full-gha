@@ -1,16 +1,15 @@
 class Api {
-  constructor({baseUrl, authorization}) {
+  constructor({baseUrl}) {
     this._cardsUrl = baseUrl + '/cards';
     this._userInfoUrl = baseUrl + '/users/me';
     this._userAvatarUrl = baseUrl + '/users/me/avatar';
-  
-    this._autorization = authorization;
   }
   
   _getHeader() {
+    const token = localStorage.getItem('jwt');
     return {
       'Content-Type': 'application/json',
-      authorization: this._autorization 
+      authorization: `Bearer ${token}` 
     }
   }
   
@@ -98,8 +97,7 @@ class Api {
 }
 
   const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-61',
-    authorization: '653fa548-6834-4cc4-a376-28fd07f6118e'   
+    baseUrl: 'http://localhost:3008' 
   });
 
 export default api;
