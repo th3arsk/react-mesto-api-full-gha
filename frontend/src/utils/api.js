@@ -97,7 +97,7 @@ class Api {
 }
 
   const api = new Api({
-    baseUrl: 'http://localhost:3008' 
+    baseUrl: 'https://api.th3arsk.students.nomoredomainsmonster.ru' 
   });
 
 export default api;

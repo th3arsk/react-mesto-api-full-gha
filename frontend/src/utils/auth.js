@@ -1,5 +1,5 @@
 //const BASE_URL = 'https://auth.nomoreparties.co' 
-const BASE_URL = 'http://localhost:3008'
+const BASE_URL = 'https://api.th3arsk.students.nomoredomainsmonster.ru'
 
 export function signup(password, email) {
   return fetch(`${BASE_URL}/signup`, {
