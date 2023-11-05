@@ -32,6 +32,22 @@ function App() {
     handleTokenCheck()
   }, )
 
+  React.useEffect(() => {
+    api.getUserInfo()
+      .then((res) => {
+        setCurrentUser(res)
+      })
+      .catch(err => console.log(`Ошибка.....: ${err}`));
+  }, )
+
+  React.useEffect(() => {
+    api.getInitialCards()
+      .then((res) => {
+        setCards(res)
+      })
+      .catch(err => console.log(`Ошибка.....: ${err}`));
+  }, )
+
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i === currentUser._id);
     
@@ -116,7 +132,7 @@ function App() {
     signup(password, email)
     .then((res) => {
        if (res) {  
-        navigate("/sign-in")
+        navigate("/signin")
         setInfoPopupStatus(true)
         setInfoPopupOpen(true)
       } else {
@@ -129,18 +145,6 @@ function App() {
 
   function handleTokenCheck() {
     if (localStorage.getItem('jwt')) {
-      api.getUserInfo()
-      .then((res) => {
-        setCurrentUser(res)
-      })
-      .catch(err => console.log(`Ошибка.....: ${err}`));
-
-      api.getInitialCards()
-      .then((res) => {
-        setCards(res)
-      })
-      .catch(err => console.log(`Ошибка.....: ${err}`));
-
       checkToken()
       .then((res) => {
         if (res) {
@@ -148,7 +152,7 @@ function App() {
           setLoggedIn(true)
           setUserEmail(res.email);
         } else {
-          navigate("/sign-in")
+          navigate("/signin")
         }
       })
       .catch(err => console.log(`Ошибка.....: ${err}`));;
@@ -166,7 +170,7 @@ function App() {
   }
 
   function exit() {
-    navigate('sign-in');
+    navigate('signin');
     setLoggedIn(false);
     localStorage.removeItem('jwt');
   }
@@ -185,15 +189,15 @@ function App() {
               </>
             }/>
           }/> 
-          <Route path="/sign-up" element={
+          <Route path="/signup" element={
             <>
-              <Header text="Войти" handleClick={()=>{navigate("/sign-in")}}/>
+              <Header text="Войти" handleClick={()=>{navigate("/signin")}}/>
               <Register onSubmit={register} />
             </>} 
           />
-          <Route path="/sign-in" element={
+          <Route path="/signin" element={
             <>
-              <Header text="Регистрация" handleClick={()=>{navigate("/sign-up")}}/>
+              <Header text="Регистрация" handleClick={()=>{navigate("/signup")}}/>
               <Login onSubmit={login}/>
             </>} 
           />

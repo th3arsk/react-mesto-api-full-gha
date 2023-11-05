@@ -36,10 +36,8 @@ export function signin(password, email) {
   })
   .then((res => res.json()))
   .then((res) => {
-    if (res) {
-      localStorage.setItem('jwt', res.token);
-      return res
-     }
+    localStorage.setItem('jwt', res.token);
+    return res
   })
 }
 

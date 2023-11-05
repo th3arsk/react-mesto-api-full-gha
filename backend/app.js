@@ -13,7 +13,7 @@ const cardsRouter = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
 const { validateLogin, validateCreateUser } = require('./middlewares/validation');
 
-const { PORT = 3008 } = process.env;
+const { PORT = 3009 } = process.env;
 const app = express();
 
 app.use(express.json());
