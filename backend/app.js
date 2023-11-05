@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
@@ -13,7 +14,6 @@ const cardsRouter = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
 const { validateLogin, validateCreateUser } = require('./middlewares/validation');
 
-const { PORT = 3009 } = process.env;
 const app = express();
 
 app.use(express.json());
@@ -52,10 +52,10 @@ app.use((err, req, res, next) => {
   next();
 });
 
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {});
+mongoose.connect(process.env.DB_ADDRESS, {});
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT, () => {
   console.log(`
-слушаем порт ${PORT},
+слушаем порт ${process.env.PORT},
 сервер активен`);
 });
